@@ -1,135 +1,193 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Моя страница — Обо мне / Публикации / Контакты</title>
-  <meta name="description" content="Простой однофайтовый сайт с тремя вкладками: обо мне, публикации, контакты." />
-  <style>
-    :root { --bg:#0b1020; --text:#e5e7eb; --muted:#94a3b8; --panel:#0f172a; --ring:rgba(14,165,233,.45); --brand:#22d3ee; }
-    @media (prefers-color-scheme: light) { :root { --bg:#f8fafc; --text:#0f172a; --muted:#475569; --panel:#ffffff; } }
-    html, body { height:100%; }
-    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial; background: var(--bg); color: var(--text); }
-    .container { max-width: 920px; margin: 0 auto; padding: 24px; }
-    header { margin-bottom: 16px; }
-    h1 { margin: 0 0 8px; font-size: clamp(28px, 5vw, 40px); }
-    p { margin: 0 0 10px; color: var(--muted); }
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Profile page — About me / Papers / Contacts </title>
+    <meta name="description" content="Dmitry Itsykson's personal page "/>
+    <style>
+        :root { --bg:#0b1020; --text:#e5e7eb; --muted:#94a3b8; --panel:#0f172a; --ring:rgba(14,165,233,.45); --brand:#22d3ee; }
+        @media (prefers-color-scheme: light) { :root { --bg:#f8fafc; --text:#0f172a; --muted:#475569; --panel:#ffffff; } }
+        html, body { height:100%; }
+        body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial; background: var(--bg); color: var(--text); }
+        .container { max-width: 920px; margin: 0 auto; padding: 24px; }
+        header { margin-bottom: 16px; }
+        h1 { margin: 0 0 8px; font-size: clamp(28px, 5vw, 40px); }
+        p { margin: 0 0 10px; color: var(--muted); }
 
     /* Tabs */
     .tabs { background: var(--panel); border: 1px solid color-mix(in oklab, var(--muted) 25%, transparent); border-radius: 16px; overflow: hidden; }
     .tablist { display:flex; gap:4px; padding:8px; border-bottom: 1px solid color-mix(in oklab, var(--muted) 20%, transparent); flex-wrap: wrap; }
-    .tab { appearance:none; border:0; background: transparent; color: var(--text); padding:10px 14px; border-radius: 10px; cursor:pointer; font-weight:600; }
+    .tab {  font-size: 24px;appearance:none; border:0; background: transparent; color: var(--text); padding:10px 14px; border-radius: 10px; cursor:pointer; font-weight:600; }
     .tab[aria-selected="true"] { background: color-mix(in oklab, var(--panel) 60%, var(--brand)); outline: 2px solid var(--ring); }
     .panel { display:none; padding: 16px; }
     .panel[aria-hidden="false"] { display:block; }
 
-    /* About layout */
-    .about { display:grid; gap:16px; grid-template-columns: 160px 1fr; align-items:start; }
-    .photo { width: 160px; height: 160px; border-radius: 16px; background: #111; object-fit: cover; border: 1px solid color-mix(in oklab, var(--muted) 30%, transparent); }
-    .chips { display:flex; gap:8px; flex-wrap:wrap; margin-top:8px; }
-    .chip { font-size: 12px; padding:6px 10px; border-radius: 999px; background: color-mix(in oklab, var(--panel) 70%, var(--brand)); color: #001018; }
+        /* About layout */
+        .about { display:grid; gap:16px; grid-template-columns: 160px 1fr; align-items:start; }
+        .photo { width: 170px; height: 246px; border-radius: 16px; background: #111; object-fit: cover; border: 1px solid color-mix(in oklab, var(--muted) 30%, transparent); }
+        .chips { display:flex; gap:8px; flex-wrap:wrap; margin-top:8px; }
+        .chip { font-size: 20px; font-weight: bold; padding:6px 10px; border-radius: 999px; background: color-mix(in oklab, var(--panel) 70%, var(--brand)); color: #001018; }
 
-    /* Publications */
-    .pubs { list-style: none; padding:0; margin:0; display:grid; gap:12px; }
-    .pub { padding:12px; border: 1px solid color-mix(in oklab, var(--muted) 20%, transparent); border-radius: 12px; background: color-mix(in oklab, var(--panel) 90%, transparent); }
-    .pub a { color: inherit; }
-    .pub small { color: var(--muted); }
+        /* Publications */
+        .pubs { list-style: none; padding:0; margin:0; display:grid; gap:12px; }
+        .pub { padding:12px; border: 1px solid color-mix(in oklab, var(--muted) 20%, transparent); border-radius: 12px; background: color-mix(in oklab, var(--panel) 90%, transparent); }
+        .pub a { color: inherit; }
+        .pub small { color: var(--muted); }
 
-    /* Contacts */
-    .contacts { display:grid; gap:10px; }
-    .item { display:flex; gap:10px; align-items:center; }
-    .item a { color: inherit; }
-    .btn { display:inline-flex; gap:8px; align-items:center; padding:10px 14px; border-radius: 10px; background: color-mix(in oklab, var(--panel) 60%, var(--brand)); border: 1px solid color-mix(in oklab, var(--muted) 30%, transparent); text-decoration:none; color:#001018; font-weight:600; }
+        /* Contacts */
+        .contacts { display:grid; gap:10px; }
+        .item { display:flex; gap:10px; align-items:center; }
+        .item a { color: inherit; }
+        .btn { display:inline-flex; gap:8px; align-items:center; padding:10px 14px; border-radius: 10px; background: color-mix(in oklab, var(--panel) 60%, var(--brand)); border: 1px solid color-mix(in oklab, var(--muted) 30%, transparent); text-decoration:none; color:#001018; font-weight:600; }
 
     @media (max-width: 720px) {
       .about { grid-template-columns: 1fr; }
       .photo { width: 100%; height: auto; aspect-ratio: 1 / 1; }
     }
-  </style>
+    </style>
 </head>
 <body>
 <main class="container">
-  <header>
-    <h1>Ваше имя</h1>
-    <p>Короткая подпись: кто вы и что делаете (например, QA / Python / автоматизация).</p>
-  </header>
+    <header>
+        <h1>Dmitry Itsykson</h1>
+        <p>I am a non-faculty researcher at the Computer Science Department of the Ben-Gurion University of the
+            Negev.</p>
+        <p>Currently, I am on leave from the Laboratory of Mathematical Logic of Steklov Institute of Mathematics at
+            St.Petersburg, where I hold a leading researcher position.</p>
+    </header>
 
-  <section class="tabs" aria-label="Профиль">
-    <div class="tablist" role="tablist">
-      <button class="tab" role="tab" id="tab-about" aria-controls="panel-about" aria-selected="true">Обо мне</button>
-      <button class="tab" role="tab" id="tab-pubs" aria-controls="panel-pubs" aria-selected="false">Публикации</button>
-      <button class="tab" role="tab" id="tab-contacts" aria-controls="panel-contacts" aria-selected="false">Контакты</button>
-    </div>
-
-    <section id="panel-about" class="panel" role="tabpanel" aria-labelledby="tab-about" aria-hidden="false">
-      <div class="about">
-        <img class="photo" src="avatar.jpg" alt="Моя фотография" />
-        <div>
-          <h2 style="margin:0 0 6px">Привет! Я — Имя Фамилия</h2>
-          <p>Коротко расскажите о себе: опыт, интересы, с чем можете помочь. 2–4 предложения. Можно перечислить стек и направления, которые нравятся.</p>
-          <div class="chips">
-            <span class="chip">QA</span>
-            <span class="chip">Python</span>
-            <span class="chip">Automation</span>
-            <span class="chip">Web</span>
-          </div>
+    <section class="tabs" aria-label="Профиль">
+        <div class="tablist" role="tablist">
+            <button class="tab" role="tab" id="tab-about" aria-controls="panel-about" aria-selected="true">About me
+            </button>
+            <button class="tab" role="tab" id="tab-pubs" aria-controls="panel-pubs" aria-selected="false">Research
+                papers
+            </button>
+            <button class="tab" role="tab" id="tab-contacts" aria-controls="panel-contacts" aria-selected="false">
+                Contacts
+            </button>
         </div>
-      </div>
-    </section>
 
-    <section id="panel-pubs" class="panel" role="tabpanel" aria-labelledby="tab-pubs" aria-hidden="true">
-      <h2 style="margin:0 0 8px">Публикации</h2>
-      <ul class="pubs">
-        <li class="pub">
-          <strong>Название публикации №1</strong><br/>
-          <small>Где опубликовано · Год</small><br/>
-          <a href="#" target="_blank" rel="noopener">Ссылка</a>
-        </li>
-        <li class="pub">
-          <strong>Название публикации №2</strong><br/>
-          <small>Где опубликовано · Год</small><br/>
-          <a href="#" target="_blank" rel="noopener">Ссылка</a>
-        </li>
-        <!-- Добавьте свои пункты -->
-      </ul>
-    </section>
+        <section id="panel-about" class="panel" role="tabpanel" aria-labelledby="tab-about" aria-hidden="false">
+            <div class="about">
+                <img class="photo" src="itsykson.jpg" alt="Profile photo"/>
+                <div>
+                    <h2 style="margin:0 0 6px">Research interests</h2>
+                    <p>I am a theoretical computer scientist. My research mainly focuses on computational complexity
+                        theory, including propositional proof complexity, lower bounds for algorithms for Boolean
+                        satisfiability, and average-case complexity.
+                    </p>
+                    <h2 style="margin:0 0 6px">Education and degrees</h2>
+                    <p>In 2006 I graduated from St. Petersburg University.
 
-    <section id="panel-contacts" class="panel" role="tabpanel" aria-labelledby="tab-contacts" aria-hidden="true">
-      <h2 style="margin:0 0 8px">Контакты</h2>
-      <div class="contacts">
-        <div class="item">📧 <a href="mailto:you@example.com">you@example.com</a></div>
-        <div class="item">💬 <a href="https://t.me/your_handle" target="_blank" rel="noopener">Telegram</a></div>
-        <div class="item">💼 <a href="https://www.linkedin.com/in/your_profile/" target="_blank" rel="noopener">LinkedIn</a></div>
-        <div>
-          <a class="btn" href="mailto:you@example.com?subject=Привет%20с%20сайта">Написать письмо</a>
-        </div>
-      </div>
+                        In 2009, I completed a PhD (Russian degree candidate of science) at Steklov Institute of
+                        Mathematics at St. Petersburg, thesis "Average-case complexity of randomized computations with
+                        bounded error" (supervisor Edward A. Hirsch).
+
+                        In 2022, I defended a habilitation thesis (for a Russian degree doctor of science), "Lower
+                        bounds and optimality for proof systems".
+                    </p>
+
+                    <h2 style="margin:0 0 6px">Research positions</h2>
+                    <p>Since 2009, I have been working at the Laboratory of Mathematical Logic of Steklov Institute of
+                        Mathematics at St.Petersburg.
+
+                        Since 2022, I have been working at the Computer Science Department of the Ben-Gurion University
+                        of the Negev, at Klim Efremenko's invitation.
+                    </p>
+
+                    <h2 style="margin:0 0 6px">Teaching</h2>
+                    <p>From 2004 to 2011, I taught at the Center of Mathematical Education at Lyceum 239 (additional
+                        mathematical education for high school students).
+
+                        From 2008 to 2019, I was a part-time associate professor at the Department of Mathematics and
+                        Information Technology of St. Petersburg Academic University.
+                        From 2018 to 2022, I was a part-time associate professor at the Department of Mathematics and
+                        Computer Science of St. Petersburg State University.
+                    </p>
+                    <div class="chips">
+                        <span class="chip">Proof complexity</span>
+                        <span class="chip">Average-case complexity</span>
+                        <span class="chip">SAT Algorithms</span>
+                        <span class="chip">Computational complexity</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="panel-pubs" class="panel" role="tabpanel" aria-labelledby="tab-pubs" aria-hidden="true">
+            <h2 style="margin:0 0 8px">
+                Research papers</h2>
+            <ul class="pubs">
+                <li class="pub">
+                    <div>Klim Efremenko and Dmitry Itsykson</div>
+                    <div><strong>Amortized Closure and Its Applications in Lifting for Resolution over
+                        Parities.</strong></div>
+                    <div>ECCC Report <a href="https://eccc.weizmann.ac.il/report/2025/039/" target="_blank"
+                                        rel="noopener">
+                        TR25-049</a> · 2025
+                    </div>
+                </li>
+
+                <li class="pub">
+                    <div>Yaroslav Alekseev and Dmitry Itsykson</div>
+                    <div><strong>ALifting to bounded-depth and regular resolutions over parities via games.</strong>
+                    </div>
+                    <div>Electronic Colloquium on Computational Complexity, technical report <a
+                            href="https://eccc.weizmann.ac.il/report/2024/128/" target="_blank"
+                            rel="noopener">
+                        TR24-128</a> , 2024. To appear in proceedings of STOC 2025.
+                    </div>
+                </li>
+
+                <!-- Добавьте свои пункты -->
+            </ul>
+        </section>
+
+        <section id="panel-contacts" class="panel" role="tabpanel" aria-labelledby="tab-contacts" aria-hidden="true">
+            <div class="contacts">
+                <p> Address 1: </p>
+                <div class="item"> Department of Computer Science,<br>
+                    Ben-Gurion University of the Negev,<br>
+                    P.O. Box 653 Beer-Sheva 84105, Israel<br>
+                </div>
+
+                <p> Address 2: </p>
+                <div class="item"> Laboratory of Mathematical Logic,<br>
+                    Steklov Institute of Mathematics at St.Petersburg,<br>
+                    27 Fontanka, St.Petersburg 191023, Russia<br>
+                </div>
+                <div class="item">📧 <a href="mailto:dmitrits@gmail.com">dmitrits@gmail.com</a></div>
+                <!-- Добавьте свои пункты  <div class="item">💼 <a href="https://www.linkedin.com/in/your_profile/" target="_blank" rel="noopener">LinkedIn</a>-->
+            </div>
+            </div>
+        </section>
     </section>
-  </section>
 </main>
 
 <script>
-  // Простое переключение вкладок с a11y-атрибутами
-  const tabs = document.querySelectorAll('.tab');
-  const panels = document.querySelectorAll('.panel');
+    // Простое переключение вкладок с a11y-атрибутами
+    const tabs = document.querySelectorAll('.tab');
+    const panels = document.querySelectorAll('.panel');
 
-  function activate(id) {
-    tabs.forEach(t => t.setAttribute('aria-selected', String(t.id === 'tab-' + id)));
-    panels.forEach(p => p.setAttribute('aria-hidden', String(p.id !== 'panel-' + id)));
-    // Фокус на активной вкладке для клавиатурной навигации
-    const activeTab = document.getElementById('tab-' + id);
-    if (activeTab) activeTab.focus();
-  }
+    function activate(id) {
+      tabs.forEach(t => t.setAttribute('aria-selected', String(t.id === 'tab-' + id)));
+      panels.forEach(p => p.setAttribute('aria-hidden', String(p.id !== 'panel-' + id)));
+      // Фокус на активной вкладке для клавиатурной навигации
+      const activeTab = document.getElementById('tab-' + id);
+      if (activeTab) activeTab.focus();
+    }
 
-  tabs.forEach(btn => {
-    btn.addEventListener('click', () => activate(btn.id.replace('tab-', '')));
-    btn.addEventListener('keydown', (e) => {
-      const order = Array.from(tabs);
-      const i = order.indexOf(btn);
-      if (e.key === 'ArrowRight') order[(i+1)%order.length].click();
-      if (e.key === 'ArrowLeft') order[(i-1+order.length)%order.length].click();
+    tabs.forEach(btn => {
+      btn.addEventListener('click', () => activate(btn.id.replace('tab-', '')));
+      btn.addEventListener('keydown', (e) => {
+        const order = Array.from(tabs);
+        const i = order.indexOf(btn);
+        if (e.key === 'ArrowRight') order[(i+1)%order.length].click();
+        if (e.key === 'ArrowLeft') order[(i-1+order.length)%order.length].click();
+      });
     });
-  });
 </script>
 </body>
 </html>
